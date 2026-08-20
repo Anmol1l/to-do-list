@@ -1,0 +1,37 @@
+* {
+    margin: 0px;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#sidebar {
+    background-color: white;
+    height: 100vh;
+    margin: 8px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+main {
+    background-color: rgb(194, 205, 214);
+}
+
+dialog {
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+form .text {
+    display: flex;
+    flex-direction: column;
+}
