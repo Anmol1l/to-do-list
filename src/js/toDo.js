@@ -9,14 +9,9 @@ class ToDo {
 
 const toDoList = [];
 
-export default function createToDo() {
-    const title = prompt("Enter Title");
-    const notes = prompt("Enter Note");
-    const duedate = new Date().toLocaleDateString();
-    const priority = prompt("Enter Priority");
-
-    const todo = new ToDo(title,notes,duedate,priority); 
+export function createToDoArray(title,description,duedate,priority) {
+    
+    const todo = new ToDo(title,description,duedate,priority); 
     toDoList.push(todo);
     console.log(toDoList);
 }
-window.createToDo = createToDo;
