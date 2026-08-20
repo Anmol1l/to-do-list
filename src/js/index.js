@@ -1,1 +1,2 @@
-import createToDo from "./toDo.js";
+import "../css/style.css"
+import "./dom.js";
