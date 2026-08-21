@@ -1,14 +1,14 @@
 import {createToDoArray} from "./toDo.js";
 
 
-export function openDialog() {
-    const addTask = document.querySelector('.open-dialog');
-    const openDialog = document.querySelector('dialog')
+export function openTaskDialog() {
+    const addTask = document.querySelector('.open-dialog-Btn');
+    const openDialog = document.querySelector('.add-task-dialog')
     addTask.addEventListener('click', () => {
         openDialog.showModal();
     })
 }
-openDialog();
+openTaskDialog();
 
 export function addTask() {
     const addTaskBtn = document.querySelector('#add-task');
@@ -29,3 +29,11 @@ export function createToDo() {
     createToDoArray(title,description,duedate,priority)
 }
 
+export function openProjectDialog() {
+    const addProject = document.querySelector('.open-project-dialog');
+    const openDialog = document.querySelector('.add-project-dialog')
+    addProject.addEventListener('click', () => {
+        openDialog.showModal();
+    })
+}
+openProjectDialog();

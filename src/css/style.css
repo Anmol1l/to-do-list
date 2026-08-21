@@ -4,34 +4,138 @@
 
 body {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 300px 1fr;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #sidebar {
     background-color: white;
     height: 100vh;
-    margin: 8px 0px;
+}
+
+#sidebar .heading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+}
+
+#sidebar h1 {
+    margin: 10px 6px;
+}
+
+.open-dialog-Btn {
+    all: unset;
+    background-color: #12bd12;
+    padding: 8px 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+    border-radius: 8px;
+}
+
+hr {
+    width: 80%;
+    margin: 20px 0px;
+}
+
+.project-section h3 {
+    margin-left: 30px;
+}
+
+.project-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-section-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+
+.project-section-heading button {
+    background-color: white;
+    border: none;
+    font-size: 1rem;
+}
+
+.project-section-heading button:hover {
+    background-color: #c2cdd6;
+    color: #12bd12;
+    border-radius: 4px;
+}
+
+.projects ul {
+    list-style-position: inside;
+    list-style-type: "# ";
+}
+
+.projects li::marker {
+    font-size: 1.2rem;
+    color: red;
 }
 
 main {
-    background-color: rgb(194, 205, 214);
+    background-color: #c2cdd6;
 }
 
-dialog {
+.add-task-dialog {
     margin: auto;
 }
 
-form {
+.task-form {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
-form .text {
+
+.task-form .text {
     display: flex;
     flex-direction: column;
+}
+
+.add-project-dialog {
+    clip-path: polygon(10% 10%, 90% 10%, 90% 60%, 10% 60%, 10% 26.79%, 0.88% 21.52%, 10% 16.25%);
+    background-color: #7f9dde;
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    top: 114px;
+    left: 288px;
+}
+
+.project-form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 75px;
+    left: 90px;
+}
+
+.color-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-picker+input {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.add-project-Btn {
+    border: none;
+    width: 70px;
+    background-color: #057705;
+    padding: 4px 10px;
+    color: white;
+    border-radius: 4px;
 }
