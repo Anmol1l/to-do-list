@@ -24,3 +24,6 @@ export function createProject (projectName) {
     ToDoLists[projectName] = [];
 }
 
+export function deleteProject (name) {
+    delete ToDoLists[name];
+}

@@ -177,3 +177,8 @@ main {
     color: white;
     border-radius: 4px;
 }
+
+.delete-popUp {
+    margin: auto;
+    inset: 0;
+}

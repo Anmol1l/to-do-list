@@ -1,4 +1,4 @@
-import { createProject } from "./toDo.js";
+import { createProject, deleteProject } from "./toDo.js";
 import closeImg from "../images-and-icons/close.svg"
 
 export function renderProjects() {
@@ -19,9 +19,9 @@ export function renderProjects() {
     img.alt = "close";
     spanImg.appendChild(img);
 
-    if (projectForm.reportValidity()) {
+    if (projectForm.reportValidity() && projectName != 'toDo') {
         spanText.textContent = projectName;
-        div.append(spanText,spanImg);
+        div.append(spanText, spanImg);
         listItem.appendChild(div);
 
         createProject(projectName);
@@ -30,8 +30,31 @@ export function renderProjects() {
         projectList.appendChild(listItem);
         projectForm.reset();
     }
+
+    spanImg.addEventListener('click', () => {
+        deleteProjectRender(listItem,projectList,projectName);
+    })
 }
 
 function setProjectColor(item, projectColor) {
     item.style.setProperty('--project-color', projectColor);
+}
+
+function deleteProjectRender(listItem, projectList, projectName) {
+    const deleteDialog = document.querySelector('.delete-popUp');
+    deleteDialog.showModal();
+
+    const confirmText = deleteDialog.querySelector('h3');
+    confirmText.textContent = `Delete ${projectName}`;
+    const no = document.querySelector('#no');
+    const yes = document.querySelector('#yes');
+
+    no.addEventListener('click', () => {
+        deleteDialog.close();
+    })
+    yes.addEventListener('click', () => {
+        projectList.removeChild(listItem);
+        deleteProject(projectName);
+        deleteDialog.close();
+    })
 }
