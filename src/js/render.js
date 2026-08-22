@@ -8,7 +8,6 @@ export function renderProjects() {
 
     const projectList = document.querySelector('.projects ul');
     const listItem = document.createElement('li');
-    // listItem.classList.add('new-project');
     const div = document.createElement('div');
     const spanText = document.createElement('span');
     spanText.id = 'project-name';

@@ -16,18 +16,25 @@ export function addTask() {
     addTaskBtn.addEventListener('click', (event) => {
         event.preventDefault();
         createToDoInProject();
+
     })
 }
 addTask();
 
 
 export function createToDo(projectName) {
+    const taskForm = document.querySelector('.task-form')
+    const openDialog = document.querySelector('.add-task-dialog')
     const title = document.querySelector('#title').value;
     const description = document.querySelector('#description').value;
     const duedate = document.querySelector('#date').value;
     const priority = document.querySelector('#priority').value;
 
-    createToDoArray(projectName,title, description, duedate, priority)
+    if (taskForm.reportValidity()) {
+        createToDoArray(projectName, title, description, duedate, priority)
+        taskForm.reset();
+        openDialog.close();
+    }
 }
 
 export function openProjectDialog() {
@@ -62,9 +69,9 @@ function selectProject() {
     })
 }
 
-function checkSelectClass (projects) {
+function checkSelectClass(projects) {
     projects.forEach(project => {
-        if(project.classList.contains('select')){
+        if (project.classList.contains('select')) {
             project.classList.remove('select');
         }
     })
