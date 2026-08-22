@@ -46,6 +46,26 @@ function addProject() {
         renderProjects();
         const dialog = document.querySelector('.add-project-dialog');
         dialog.close();
+        selectProject();
     })
 }
 addProject();
+
+function selectProject() {
+    const projects = document.querySelectorAll('.projects ul li');
+
+    projects.forEach(project => {
+        project.addEventListener('click', () => {
+            checkSelectClass(projects);
+            project.classList.add('select');
+        })
+    })
+}
+
+function checkSelectClass (projects) {
+    projects.forEach(project => {
+        if(project.classList.contains('select')){
+            project.classList.remove('select');
+        }
+    })
+}

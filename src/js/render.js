@@ -51,10 +51,10 @@ function deleteProjectRender(listItem, projectList, projectName) {
 
     no.addEventListener('click', () => {
         deleteDialog.close();
-    })
+    },{ once: true });
     yes.addEventListener('click', () => {
         projectList.removeChild(listItem);
         deleteProject(projectName);
         deleteDialog.close();
-    })
+    },{ once: true });
 }

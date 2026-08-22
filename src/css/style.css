@@ -111,6 +111,10 @@ li:hover span#img img{
     visibility: visible;
 }
 
+.projects ul li.select {
+    padding: 0px 10px;
+    background-color: #6d758858;
+}
 
 
 main {
