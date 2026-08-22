@@ -70,11 +70,19 @@ hr {
 .projects ul {
     list-style-position: inside;
     list-style-type: "# ";
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .projects li::marker {
     font-size: 1.2rem;
     color: red;
+}
+
+.projects li.new-project::marker {
+    font-size: 1.2rem;
+    color: var(--project-color,#f55656);
 }
 
 main {

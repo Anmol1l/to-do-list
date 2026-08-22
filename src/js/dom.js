@@ -46,7 +46,7 @@ function addProject() {
         const projectForm = document.querySelector('.project-form')
         const dialog = document.querySelector('.add-project-dialog');
         const projectName = document.querySelector('#project').value;
-        const projectColor = document.querySelector('#color');
+        const projectColor = document.querySelector('#color').value;
 
         const projectList = document.querySelector('.projects ul');
         const listItem = document.createElement('li');
@@ -54,6 +54,7 @@ function addProject() {
         if (projectForm.reportValidity()) {
             listItem.classList.add('new-project');
             listItem.textContent = projectName;
+            setProjectColor(listItem, projectColor)
 
             projectList.appendChild(listItem);
             projectForm.reset();
@@ -63,3 +64,7 @@ function addProject() {
     })
 }
 addProject();
+
+function setProjectColor(item, projectColor) {
+    item.style.setProperty('--project-color', projectColor);
+}
