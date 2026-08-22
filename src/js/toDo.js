@@ -24,4 +24,3 @@ export function createProject (projectName) {
     ToDoLists[projectName] = [];
 }
 
-// createProject('hello')

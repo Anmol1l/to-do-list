@@ -8,6 +8,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* sidebar */
+
 #sidebar {
     background-color: white;
     height: 100vh;
@@ -88,6 +90,8 @@ hr {
 main {
     background-color: #c2cdd6;
 }
+
+/* dialog */
 
 .add-task-dialog {
     margin: auto;
