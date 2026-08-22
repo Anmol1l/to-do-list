@@ -1,4 +1,4 @@
-import {createToDoArray} from "./toDo.js";
+import { createToDoArray } from "./toDo.js";
 
 
 export function openTaskDialog() {
@@ -26,7 +26,7 @@ export function createToDo() {
     const duedate = document.querySelector('#date').value;
     const priority = document.querySelector('#priority').value;
 
-    createToDoArray(title,description,duedate,priority)
+    createToDoArray(title, description, duedate, priority)
 }
 
 export function openProjectDialog() {
@@ -37,3 +37,29 @@ export function openProjectDialog() {
     })
 }
 openProjectDialog();
+
+function addProject() {
+    const addProjectBtn = document.querySelector('.add-project-Btn');
+    addProjectBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const projectForm = document.querySelector('.project-form')
+        const dialog = document.querySelector('.add-project-dialog');
+        const projectName = document.querySelector('#project').value;
+        const projectColor = document.querySelector('#color');
+
+        const projectList = document.querySelector('.projects ul');
+        const listItem = document.createElement('li');
+
+        if (projectForm.reportValidity()) {
+            listItem.classList.add('new-project');
+            listItem.textContent = projectName;
+
+            projectList.appendChild(listItem);
+            projectForm.reset();
+            dialog.close();
+        }
+
+    })
+}
+addProject();
