@@ -11,7 +11,11 @@ body {
 /* sidebar */
 
 #sidebar {
-    background-color: white;
+    background-color: #7f9dde;
+    height: 100vh;
+    color: #eeeded;
+    position: sticky;
+    top: 0;
     height: 100vh;
 }
 
@@ -28,17 +32,17 @@ body {
 
 .open-dialog-Btn {
     all: unset;
-    background-color: #12bd12;
+    background-color: #00ac00;
     padding: 8px 10px;
     font-size: 1.5rem;
     font-weight: 500;
     color: white;
     border-radius: 8px;
-    border: 2px solid white;
+    border: 2px solid #7f9dde;
 }
 
 .open-dialog-Btn:hover {
-    border: 2px solid rgb(14, 180, 14);
+    border: 2px solid #03a803;
 }
 
 hr {
@@ -63,13 +67,13 @@ hr {
 }
 
 .project-section-heading button {
-    background-color: white;
+    background-color: #7f9dde;
     border: none;
     font-size: 1rem;
 }
 
 .project-section-heading button:hover {
-    background-color: #c2cdd6;
+    background-color: white;
     color: #12bd12;
     border-radius: 4px;
 }
@@ -89,10 +93,10 @@ hr {
 
 .projects li::marker {
     font-size: 1.2rem;
-    color: var(--project-color,#f55656);
+    color: var(--project-color, #f55656);
 }
 
-.projects li > div {
+.projects li>div {
     display: inline-flex;
     position: relative;
 }
@@ -108,22 +112,25 @@ span#img img {
 
 .projects li:hover {
     padding: 0px 10px;
-    background-color: #6d758858;
+    background-color: white;
+    color: black;
     cursor: pointer;
 }
 
-li:hover span#img img{
+li:hover span#img img {
     visibility: visible;
 }
 
 .projects ul li.select {
     padding: 0px 10px;
-    background-color: #6d758858;
+    background-color: white;
+    color: black;
 }
 
 
 main {
     background-color: #c2cdd6;
+    /* margin-left: 400px; */
 }
 
 /* dialog */
@@ -190,4 +197,13 @@ main {
 .delete-popUp {
     margin: auto;
     inset: 0;
+}
+
+/* main */
+
+#main-canvas {
+    margin: 30px 30px 0px 30px;
+    background-color: white;
+    height: 100vh;
+    border-radius: 10px 10px 0px 0px;
 }
