@@ -1,4 +1,4 @@
-import { createToDoArray, createProject } from "./toDo.js";
+import { createToDoArray } from "./toDo.js";
 import { renderProjects } from "./render.js";
 
 
@@ -15,19 +15,19 @@ export function addTask() {
     const addTaskBtn = document.querySelector('#add-task');
     addTaskBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        createToDo();
+        createToDoInProject();
     })
 }
 addTask();
 
 
-export function createToDo() {
+export function createToDo(projectName) {
     const title = document.querySelector('#title').value;
     const description = document.querySelector('#description').value;
     const duedate = document.querySelector('#date').value;
     const priority = document.querySelector('#priority').value;
 
-    createToDoArray(title, description, duedate, priority)
+    createToDoArray(projectName,title, description, duedate, priority)
 }
 
 export function openProjectDialog() {
@@ -68,4 +68,10 @@ function checkSelectClass (projects) {
             project.classList.remove('select');
         }
     })
+}
+
+function createToDoInProject() {
+    const projectContainer = document.querySelector('.select');
+    const projectName = projectContainer.querySelector('#project-name').textContent;
+    createToDo(projectName);
 }

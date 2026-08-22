@@ -8,14 +8,14 @@ class ToDo {
 }
 
 const ToDoLists = {
-    toDo: [],
+    "To-Do": [],
 };
 
-export function createToDoArray(title,description,duedate,priority) {
+export function createToDoArray(projectName,title,description,duedate,priority) {
     
     const todo = new ToDo(title,description,duedate,priority); 
-    ToDoLists.toDo.push(todo);
-    console.log(ToDoLists.toDo);
+    ToDoLists[projectName].push(todo);
+    console.log(ToDoLists[projectName]);
 }
 
 window.ToDoLists = ToDoLists;

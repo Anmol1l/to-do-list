@@ -8,18 +8,19 @@ export function renderProjects() {
 
     const projectList = document.querySelector('.projects ul');
     const listItem = document.createElement('li');
-    listItem.classList.add('new-project');
+    // listItem.classList.add('new-project');
     const div = document.createElement('div');
-    const spanText = document.createElement('span')
+    const spanText = document.createElement('span');
+    spanText.id = 'project-name';
 
-    const spanImg = document.createElement('span')
-    spanImg.id = 'img'
+    const spanImg = document.createElement('span');
+    spanImg.id = 'img';
     const img = document.createElement('img');
     img.src = closeImg;
     img.alt = "close";
     spanImg.appendChild(img);
 
-    if (projectForm.reportValidity() && projectName != 'toDo') {
+    if (projectForm.reportValidity() && projectName != 'To-Do') {
         spanText.textContent = projectName;
         div.append(spanText, spanImg);
         listItem.appendChild(div);

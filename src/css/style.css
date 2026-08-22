@@ -82,12 +82,12 @@ hr {
     color: red;
 }
 
-.projects li.new-project::marker {
+.projects li::marker {
     font-size: 1.2rem;
     color: var(--project-color,#f55656);
 }
 
-.new-project > div {
+.projects li > div {
     display: inline-flex;
     position: relative;
 }
