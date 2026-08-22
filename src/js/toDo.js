@@ -7,11 +7,21 @@ class ToDo {
     }
 }
 
-const toDoList = [];
+const ToDoLists = {
+    toDo: [],
+};
 
 export function createToDoArray(title,description,duedate,priority) {
     
     const todo = new ToDo(title,description,duedate,priority); 
-    toDoList.push(todo);
-    console.log(toDoList);
+    ToDoLists.toDo.push(todo);
+    console.log(ToDoLists.toDo);
 }
+
+window.ToDoLists = ToDoLists;
+
+export function createProject (projectName) {
+    ToDoLists[projectName] = [];
+}
+
+// createProject('hello')

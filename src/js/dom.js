@@ -1,4 +1,4 @@
-import { createToDoArray } from "./toDo.js";
+import { createToDoArray,createProject } from "./toDo.js";
 
 
 export function openTaskDialog() {
@@ -52,6 +52,7 @@ function addProject() {
         const listItem = document.createElement('li');
 
         if (projectForm.reportValidity()) {
+            createProject(projectName);
             listItem.classList.add('new-project');
             listItem.textContent = projectName;
             setProjectColor(listItem, projectColor)
