@@ -2,7 +2,6 @@ import { createProject } from "./toDo.js";
 
 export function renderProjects() {
     const projectForm = document.querySelector('.project-form')
-    const dialog = document.querySelector('.add-project-dialog');
     const projectName = document.querySelector('#project').value;
     const projectColor = document.querySelector('#color').value;
 
@@ -17,7 +16,6 @@ export function renderProjects() {
 
         projectList.appendChild(listItem);
         projectForm.reset();
-        dialog.close();
     }
 }
 

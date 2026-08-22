@@ -1,4 +1,4 @@
-import { createToDoArray,createProject } from "./toDo.js";
+import { createToDoArray, createProject } from "./toDo.js";
 import { renderProjects } from "./render.js";
 
 
@@ -44,6 +44,8 @@ function addProject() {
     addProjectBtn.addEventListener('click', (event) => {
         event.preventDefault();
         renderProjects();
+        const dialog = document.querySelector('.add-project-dialog');
+        dialog.close();
     })
 }
 addProject();
