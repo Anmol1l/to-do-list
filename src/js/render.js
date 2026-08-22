@@ -1,4 +1,5 @@
 import { createProject } from "./toDo.js";
+import closeImg from "../images-and-icons/close.svg"
 
 export function renderProjects() {
     const projectForm = document.querySelector('.project-form')
@@ -7,11 +8,23 @@ export function renderProjects() {
 
     const projectList = document.querySelector('.projects ul');
     const listItem = document.createElement('li');
+    listItem.classList.add('new-project');
+    const div = document.createElement('div');
+    const spanText = document.createElement('span')
+
+    const spanImg = document.createElement('span')
+    spanImg.id = 'img'
+    const img = document.createElement('img');
+    img.src = closeImg;
+    img.alt = "close";
+    spanImg.appendChild(img);
 
     if (projectForm.reportValidity()) {
+        spanText.textContent = projectName;
+        div.append(spanText,spanImg);
+        listItem.appendChild(div);
+
         createProject(projectName);
-        listItem.classList.add('new-project');
-        listItem.textContent = projectName;
         setProjectColor(listItem, projectColor)
 
         projectList.appendChild(listItem);

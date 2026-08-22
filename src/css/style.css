@@ -87,6 +87,32 @@ hr {
     color: var(--project-color,#f55656);
 }
 
+.new-project > div {
+    display: inline-flex;
+    position: relative;
+}
+
+span#img img {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -1px;
+    left: 209px;
+    visibility: hidden;
+}
+
+.projects li:hover {
+    padding: 0px 10px;
+    background-color: #6d758858;
+    cursor: pointer;
+}
+
+li:hover span#img img{
+    visibility: visible;
+}
+
+
+
 main {
     background-color: #c2cdd6;
 }
