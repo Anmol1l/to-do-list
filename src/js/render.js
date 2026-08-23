@@ -1,5 +1,7 @@
 import { createProject, deleteProject } from "./toDo.js";
-import closeImg from "../images-and-icons/close.svg"
+import closeImg from "../images-and-icons/close.svg";
+import expandImg from "../images-and-icons/expand.svg";
+import editImg from "../images-and-icons/edit.svg";
 
 // render project section
 
@@ -114,22 +116,42 @@ export function renderTasks(task) {
     label.textContent = task.title;
     taskDiv.append(input, label);
 
-    const dateDiv = document.createElement('div');
-    dateDiv.classList.add('date')
-    dateDiv.textContent = task.duedate;
-    checkDate(dateDiv);
+    const priorityDateDiv = document.createElement('div');
+    priorityDateDiv.classList.add('priority-date');
+    const prioritySpan = document.createElement('span');
+    prioritySpan.classList.add('priority',task.priority);
+    const dateSpan = document.createElement('span');
+    dateSpan.classList.add('date');
+    dateSpan.textContent = task.duedate;
+    priorityDateDiv.append(prioritySpan,dateSpan);
+
+    const editButtonDiv = document.createElement('div');
+    editButtonDiv.classList.add('edit-buttons');
+    const editSpan = document.createElement('span');
+    editSpan.classList.add('edit');
+    const editBtn = document.createElement('img');
+    editBtn.src = editImg;
+    editBtn.alt = "edit";
+    editSpan.appendChild(editBtn);
+    const expandSpan = document.createElement('span');
+    expandSpan.classList.add('expand');
+    const expandBtn = document.createElement('img');
+    expandBtn.src = expandImg;
+    expandBtn.alt = "expand"
+    expandSpan.appendChild(expandBtn);
+    editButtonDiv.append(editSpan,expandSpan)
 
     const hr = document.createElement('hr');
 
-    toDoMinimised.append(taskDiv, dateDiv, hr);
+    toDoMinimised.append(taskDiv, priorityDateDiv,editButtonDiv, hr);
     canvas.appendChild(toDoMinimised)
 }
 
-function checkDate(dateDiv) {
-    if(dateDiv.textContent.length > 0) {
-        return;
-    }
-    else {
-        dateDiv.innerHTML = "&nbsp;";
-    }
-}
+// function checkDate(dateDiv) {
+//     if(dateDiv.textContent.length > 0) {
+//         return;
+//     }
+//     else {
+//         dateDiv.innerHTML = "&nbsp;";
+//     }
+// }

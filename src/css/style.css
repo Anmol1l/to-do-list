@@ -233,7 +233,8 @@ main {
 
 .to-do-minimised {
     font-size: 1.2rem;
-    padding: 20px 20px 0px 20px;
+    padding: 20px 5px 0px 5px;
+    position: relative;
 }
 
 .task {
@@ -241,15 +242,87 @@ main {
     gap: 10px;
 }
 
-.date {
+.priority-date {
     font-size: 0.8rem;
     margin-left: 24px;
-    margin-top: 2px;
-    color: #6ecf58;
+    margin-top: 8px;
+    display: flex;
+}
+
+.priority-date .date {
+    margin-left: 10px;
+    color: #00ac00;
+}
+
+.priority.high::after {
+    content: "High";
+    background-color: #e94a4a;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: block;
+    width: 51px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.priority.low::after {
+    content: "Low";
+    background-color: #18b3f0;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: block;
+    width: 51px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.priority.medium::after {
+    content: "Medium";
+    background-color: #f6a50e;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: block;
+    width: 51px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .to-do-minimised hr {
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 10px;
     border-color: rgba(0, 0, 0, 0.154);
+}
+
+.edit-buttons {
+    position: absolute;
+    top: 5px;
+    right: 19px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.edit {
+    margin-left: 5px;
+    height: 20px;
+    width: 20px;
+}
+
+.expand {
+    height: 30px;
+    width: 30px;
+}
+
+.to-do-minimised:hover {
+    background-color: #efecec77;
+}
+
+.to-do-minimised:hover .edit-buttons {
+    visibility: visible;
 }
