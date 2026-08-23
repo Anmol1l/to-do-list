@@ -1,3 +1,5 @@
+import { renderTasks } from "./render.js";
+
 class ToDo {
     constructor(title,notes,duedate,priority) {
         this.title = title;
@@ -16,6 +18,7 @@ export function createToDoArray(projectName,title,description,duedate,priority) 
     const todo = new ToDo(title,description,duedate,priority); 
     ToDoLists[projectName].push(todo);
     console.log(ToDoLists[projectName]);
+    renderTasks(ToDoLists[projectName].at(-1));
 }
 
 window.ToDoLists = ToDoLists;

@@ -61,7 +61,7 @@ function deleteProjectRender(listItem, projectList, projectName) {
     }, { once: true });
 }
 
-// render project section
+// render canvas section
 
 function getListColor(projectContainer) {
     const listStyles = window.getComputedStyle(projectContainer, '::marker')
@@ -95,4 +95,41 @@ export function clearProjectName() {
 
     canvasHeading.removeChild(heading);
     canvasHeading.removeChild(hr);
+}
+
+export function renderTasks(task) {
+    const canvas = document.querySelector('#to-dos');
+
+    const toDoMinimised = document.createElement('div');
+    toDoMinimised.classList.add('to-do-minimised');
+
+    const taskDiv = document.createElement('div');
+    taskDiv.classList.add('task')
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.name = 'todo';
+    input.id = 'todo';
+    const label = document.createElement('label');
+    label.for = 'todo';
+    label.textContent = task.title;
+    taskDiv.append(input, label);
+
+    const dateDiv = document.createElement('div');
+    dateDiv.classList.add('date')
+    dateDiv.textContent = task.duedate;
+    checkDate(dateDiv);
+
+    const hr = document.createElement('hr');
+
+    toDoMinimised.append(taskDiv, dateDiv, hr);
+    canvas.appendChild(toDoMinimised)
+}
+
+function checkDate(dateDiv) {
+    if(dateDiv.textContent.length > 0) {
+        return;
+    }
+    else {
+        dateDiv.innerHTML = "&nbsp;";
+    }
 }
