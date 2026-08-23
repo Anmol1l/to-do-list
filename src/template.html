@@ -35,7 +35,30 @@
     </section>
 
     <main>
-        <div id="main-canvas"></div>
+        <div id="main-canvas">
+            <div id="canvas-heading"></div>
+
+            <div id="to-dos">
+                <div class="to-do-minimised">
+                    <div class="task">
+                        <input type="checkbox" name="todo" id="todo">
+                        <label for="todo">Run 10km</label>
+                    </div>
+                    <div class="date">Today</div>
+                    <hr>
+                </div>
+
+                <div class="to-do-minimised">
+                    <div class="task">
+                        <input type="checkbox" name="todo" id="todo">
+                        <label for="todo">Run 10km</label>
+                    </div>
+                    <div class="date">12-02-2027</div>
+                    <hr>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <dialog class="add-task-dialog" closedby="any">
@@ -69,7 +92,7 @@
 
     </dialog>
 
-    <dialog class="add-project-dialog" closedby = "any">
+    <dialog class="add-project-dialog" closedby="any">
         <form action="#" class="project-form">
 
             <div class="project-name">
@@ -79,7 +102,7 @@
 
             <div class="color-container">
                 <label for="color" class="color-picker">Choose Color: </label>
-                <input type="color" value ="#f55656" name="color" id="color">
+                <input type="color" value="#f55656" name="color" id="color">
             </div>
 
             <button class="add-project-Btn">Add</button>
@@ -87,7 +110,7 @@
         </form>
     </dialog>
 
-    <dialog class="delete-popUp" closedby = "any">
+    <dialog class="delete-popUp" closedby="any">
         <h3></h3>
         <div>
             <button id="yes">Yes</button>

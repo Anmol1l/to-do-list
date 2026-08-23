@@ -70,9 +70,9 @@ function getListColor(projectContainer) {
 }
 
 export function renderProjectName() {
-    const canvas = document.querySelector('#main-canvas');
-    const heading = canvas.querySelector('h1');
-    const hasHeading = canvas.contains(heading);
+    const canvasHeading = document.querySelector('#canvas-heading');
+    const heading = canvasHeading.querySelector('h1');
+    const hasHeading = canvasHeading.contains(heading);
 
     if (!hasHeading) {
         const projectHeading = document.createElement('h1');
@@ -80,15 +80,19 @@ export function renderProjectName() {
         const projectName = projectContainer.querySelector('#project-name').textContent;
         projectHeading.textContent = projectName;
         projectHeading.style.color = getListColor(projectContainer);
-        canvas.appendChild(projectHeading);
+        canvasHeading.appendChild(projectHeading);
+        const hr = document.createElement('hr');
+        canvasHeading.appendChild(hr);
     }
 
 }
 renderProjectName();
 
 export function clearProjectName() {
-    const canvas = document.querySelector('#main-canvas');
-    const heading = canvas.querySelector('h1');
+    const canvasHeading = document.querySelector('#canvas-heading');
+    const heading = canvasHeading.querySelector('h1');
+    const hr = canvasHeading.querySelector('hr');
 
-    canvas.removeChild(heading);
+    canvasHeading.removeChild(heading);
+    canvasHeading.removeChild(hr);
 }

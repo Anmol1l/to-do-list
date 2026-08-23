@@ -45,7 +45,7 @@ body {
     border: 2px solid #03a803;
 }
 
-hr {
+#sidebar hr {
     width: 80%;
     margin: 20px 0px;
 }
@@ -208,7 +208,49 @@ main {
     border-radius: 10px 10px 0px 0px;
 }
 
-#main-canvas h1 {
+#canvas-heading {
     padding: 10px 25px;
-    color: var(--project-color);
+}
+
+#canvas-heading h1 {
+    margin-top: 5px;
+}
+
+#canvas-heading hr {
+    width: 100%;
+    margin: 15px 0px;
+}
+
+#main-canvas {
+    display: grid;
+    grid-template-rows: 90px 1fr;
+    gap: 0px;
+}
+
+#to-dos {
+    padding: 0px 25px;
+}
+
+.to-do-minimised {
+    font-size: 1.2rem;
+    /* background-color: rgb(245, 240, 240); */
+    padding: 20px 20px 0px 20px;
+}
+
+.task {
+    display: flex;
+    gap: 10px;
+}
+
+.date {
+    font-size: 0.8rem;
+    margin-left: 24px;
+    margin-top: 2px;
+    color: #6ecf58;
+}
+
+.to-do-minimised hr {
+    width: 100%;
+    margin-top: 10px;
+    border-color: rgba(0, 0, 0, 0.154);
 }
