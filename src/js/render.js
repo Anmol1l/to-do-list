@@ -1,6 +1,8 @@
 import { createProject, deleteProject } from "./toDo.js";
 import closeImg from "../images-and-icons/close.svg"
 
+// render project section
+
 export function renderProjects() {
     const projectForm = document.querySelector('.project-form')
     const projectName = document.querySelector('#project').value;
@@ -32,7 +34,7 @@ export function renderProjects() {
     }
 
     spanImg.addEventListener('click', () => {
-        deleteProjectRender(listItem,projectList,projectName);
+        deleteProjectRender(listItem, projectList, projectName);
     })
 }
 
@@ -51,10 +53,42 @@ function deleteProjectRender(listItem, projectList, projectName) {
 
     no.addEventListener('click', () => {
         deleteDialog.close();
-    },{ once: true });
+    }, { once: true });
     yes.addEventListener('click', () => {
         projectList.removeChild(listItem);
         deleteProject(projectName);
         deleteDialog.close();
-    },{ once: true });
+    }, { once: true });
+}
+
+// render project section
+
+function getListColor(projectContainer) {
+    const listStyles = window.getComputedStyle(projectContainer, '::marker')
+    const color = listStyles.getPropertyValue('color');
+    return color;
+}
+
+export function renderProjectName() {
+    const canvas = document.querySelector('#main-canvas');
+    const heading = canvas.querySelector('h1');
+    const hasHeading = canvas.contains(heading);
+
+    if (!hasHeading) {
+        const projectHeading = document.createElement('h1');
+        const projectContainer = document.querySelector('.select');
+        const projectName = projectContainer.querySelector('#project-name').textContent;
+        projectHeading.textContent = projectName;
+        projectHeading.style.color = getListColor(projectContainer);
+        canvas.appendChild(projectHeading);
+    }
+
+}
+renderProjectName();
+
+export function clearProjectName() {
+    const canvas = document.querySelector('#main-canvas');
+    const heading = canvas.querySelector('h1');
+
+    canvas.removeChild(heading);
 }

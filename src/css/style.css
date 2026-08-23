@@ -207,3 +207,8 @@ main {
     height: 100vh;
     border-radius: 10px 10px 0px 0px;
 }
+
+#main-canvas h1 {
+    padding: 10px 25px;
+    color: var(--project-color);
+}

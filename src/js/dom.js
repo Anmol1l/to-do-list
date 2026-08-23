@@ -1,5 +1,5 @@
 import { createToDoArray } from "./toDo.js";
-import { renderProjects } from "./render.js";
+import { renderProjects, renderProjectName, clearProjectName } from "./render.js";
 
 
 export function openTaskDialog() {
@@ -65,6 +65,8 @@ function selectProject() {
         project.addEventListener('click', () => {
             checkSelectClass(projects);
             project.classList.add('select');
+            clearProjectName();
+            renderProjectName();
         })
     })
 }
