@@ -251,7 +251,6 @@ main {
 
 .priority-date .date {
     margin-left: 10px;
-    color: #00ac00;
 }
 
 .priority.high::after {

@@ -1,4 +1,5 @@
 import { createProject, deleteProject } from "./toDo.js";
+import { compareAsc } from "date-fns";
 import closeImg from "../images-and-icons/close.svg";
 import expandImg from "../images-and-icons/expand.svg";
 import editImg from "../images-and-icons/edit.svg";
@@ -123,6 +124,7 @@ export function renderTasks(task) {
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
     dateSpan.textContent = task.duedate;
+    checkDate(dateSpan.textContent,dateSpan);
     priorityDateDiv.append(prioritySpan,dateSpan);
 
     const editButtonDiv = document.createElement('div');
@@ -147,11 +149,17 @@ export function renderTasks(task) {
     canvas.appendChild(toDoMinimised)
 }
 
-// function checkDate(dateDiv) {
-//     if(dateDiv.textContent.length > 0) {
-//         return;
-//     }
-//     else {
-//         dateDiv.innerHTML = "&nbsp;";
-//     }
-// }
+function checkDate(date,dateSpan) {
+    console.log(date);
+    const today = new Date().toISOString().split('T')[0];
+    console.log(today);
+    let result = compareAsc(new Date(date), new Date(today));
+
+    if (result == 0) {
+        dateSpan.textContent = "Today";
+        dateSpan.style.color = "#00ac00";
+    }
+    else if (result == -1) {
+        dateSpan.style.color = "red"
+    }
+}
