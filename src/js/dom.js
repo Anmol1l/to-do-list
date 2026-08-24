@@ -1,5 +1,5 @@
-import { createToDoArray } from "./toDo.js";
-import { renderProjects, renderProjectName, clearProjectName } from "./render.js";
+import { createToDoArray, ToDoLists } from "./toDo.js";
+import { renderProjects, renderProjectName, clearProjectName, renderAllTasks, clearCanvas } from "./render.js";
 
 
 export function openTaskDialog() {
@@ -67,6 +67,7 @@ function selectProject() {
             project.classList.add('select');
             clearProjectName();
             renderProjectName();
+            showTasksOfSelectProject();
         })
     })
 }
@@ -83,4 +84,11 @@ function createToDoInProject() {
     const projectContainer = document.querySelector('.select');
     const projectName = projectContainer.querySelector('#project-name').textContent;
     createToDo(projectName);
+}
+
+function showTasksOfSelectProject() {
+    const projectContainer = document.querySelector('.select');
+    const projectName = projectContainer.querySelector('#project-name').textContent;
+    clearCanvas();
+    renderAllTasks(ToDoLists[projectName]);
 }

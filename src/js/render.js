@@ -100,7 +100,7 @@ export function clearProjectName() {
     canvasHeading.removeChild(hr);
 }
 
-export function renderTasks(task) {
+export function renderNewTasks(task) {
     const canvas = document.querySelector('#to-dos');
 
     const toDoMinimised = document.createElement('div');
@@ -149,10 +149,16 @@ export function renderTasks(task) {
     canvas.appendChild(toDoMinimised)
 }
 
+export function renderAllTasks(taskArray) {
+    taskArray.forEach(task => {
+        renderNewTasks(task);
+    });
+}
+
+window.renderAllTasks = renderAllTasks;
+
 function checkDate(date,dateSpan) {
-    console.log(date);
     const today = new Date().toISOString().split('T')[0];
-    console.log(today);
     let result = compareAsc(new Date(date), new Date(today));
 
     if (result == 0) {
@@ -162,4 +168,12 @@ function checkDate(date,dateSpan) {
     else if (result == -1) {
         dateSpan.style.color = "red"
     }
+    else if (result == 1) {
+        dateSpan.style.color = "#ff8800"
+    }
+}
+
+export function clearCanvas() {
+    const canvas = document.querySelector('#to-dos');
+    canvas.replaceChildren();
 }
