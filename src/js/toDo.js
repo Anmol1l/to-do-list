@@ -1,9 +1,9 @@
 import { renderNewTasks } from "./render.js";
 
 class ToDo {
-    constructor(title, notes, duedate, priority, id) {
+    constructor(title, description, duedate, priority, id) {
         this.title = title;
-        this.notes = notes;
+        this.description = description;
         this.duedate = duedate;
         this.priority = priority;
         this.id = crypto.randomUUID();

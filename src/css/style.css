@@ -347,6 +347,11 @@ main {
     border-color: rgba(0, 0, 0, 0.154);
 }
 
+.task-edit {
+    display: flex;
+    gap: 10px;
+}
+
 .task-edit input[type="text"] {
     border: none;
     font-size: 1.2rem;
