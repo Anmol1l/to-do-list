@@ -101,37 +101,71 @@ export function clearProjectName() {
     canvasHeading.removeChild(hr);
 }
 
-export function renderNewTasks(task) {
+export function renderExpandedTask(task) {
 
     const canvas = document.querySelector('#to-dos');
 
-    const toDoMinimised = document.createElement('div');
-    toDoMinimised.classList.add('to-do-minimised');
-    toDoMinimised.dataset.id = task.id;
+    const toDoExpanded = document.createElement('div');
+    toDoExpanded.classList.add('to-do-expanded');
+    toDoExpanded.dataset.id = task.id;
 
     const projectContainer = document.querySelector('.select');
     const projectName = projectContainer.querySelector('#project-name').textContent;
 
     const taskDiv = document.createElement('div');
-    taskDiv.classList.add('task')
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.name = 'todo';
-    input.id = 'todo';
-    const label = document.createElement('label');
-    label.for = 'todo';
-    label.textContent = task.title;
-    taskDiv.append(input, label);
+    taskDiv.classList.add('task-edit')
+    const inputCheck = document.createElement('input');
+    inputCheck.type = 'checkbox';
+    inputCheck.name = 'todo';
+    inputCheck.id = 'todo';
+    const inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    inputTitle.name = 'text-edit'
+    inputTitle.id = 'text-edit'
+    inputTitle.value = task.title;
+    inputTitle.maxLength = '20'
+    inputTitle.disabled = true;
+    taskDiv.append(inputCheck, inputTitle);
+
+    const descriptionDiv = document.createElement('div');
+    descriptionDiv.classList.add('description-edit');
+    const labelDesc = document.createElement('label');
+    labelDesc.for = 'description';
+    labelDesc.textContent = "Description:";
+    const inputDesc = document.createElement('input');
+    inputDesc.type = "text";
+    inputDesc.name = "description-edit";
+    inputDesc.id = "description-edit";
+    inputDesc.value = task.description;
+    inputDesc.disabled = true;
+    descriptionDiv.append(labelDesc, inputDesc)
 
     const priorityDateDiv = document.createElement('div');
-    priorityDateDiv.classList.add('priority-date');
-    const prioritySpan = document.createElement('span');
-    prioritySpan.classList.add('priority', task.priority);
-    const dateSpan = document.createElement('span');
-    dateSpan.classList.add('date');
-    dateSpan.textContent = task.duedate;
-    checkDate(dateSpan.textContent, dateSpan);
-    priorityDateDiv.append(prioritySpan, dateSpan);
+    priorityDateDiv.classList.add('priority-date-edit');
+    const select = document.createElement('select');
+    select.name = 'priority-edit';
+    select.id = 'priority-edit';
+    select.maxLength = '100';
+    select.classList.add(task.priority);
+
+    const options = [
+        { text: "Low", value: "low" },
+        { text: "Medium", value: "medium" },
+        { text: "High", value: "high" },
+    ]
+    options.forEach(option => {
+        select.add(new Option(option.text, option.value))
+    })
+    select.disabled = true;
+
+    const dateInput = document.createElement('input');
+    dateInput.type = 'date';
+    dateInput.name = 'edit-date';
+    dateInput.id = 'edit-input';
+    dateInput.value = task.duedate;
+    dateInput.disabled = true;
+    priorityDateDiv.append(select, dateInput);
+
 
     const editButtonDiv = document.createElement('div');
     editButtonDiv.classList.add('edit-buttons');
@@ -153,26 +187,31 @@ export function renderNewTasks(task) {
     delBtn.src = delImg;
     delBtn.alt = "delete";
     delSpan.appendChild(delBtn);
+    editButtonDiv.append(editSpan, expandSpan, delSpan)
 
-    expandSpan.addEventListener('click', () => {
-        renderExpandedTask(toDoMinimised, task);
+    expandBtn.addEventListener('click', () => {
+        const visibility = window.getComputedStyle(descriptionDiv)
+        if (visibility.display === "none") {
+            descriptionDiv.style.display = "";
+        }
+        else {
+            descriptionDiv.style.display = "none"
+        }
     })
 
     delSpan.addEventListener('click', () => {
-        deleteTask(projectName, toDoMinimised);
+        deleteTask(projectName, toDoExpanded);
     })
-
-    editButtonDiv.append(editSpan, expandSpan, delSpan)
 
     const hr = document.createElement('hr');
 
-    toDoMinimised.append(taskDiv, priorityDateDiv, editButtonDiv, hr);
-    canvas.appendChild(toDoMinimised)
+    toDoExpanded.append(taskDiv, descriptionDiv, priorityDateDiv, editButtonDiv, hr);
+    canvas.appendChild(toDoExpanded)
 }
 
 export function renderAllTasks(taskArray) {
     taskArray.forEach(task => {
-        renderNewTasks(task);
+        renderExpandedTask(task);
     });
 }
 
@@ -204,93 +243,3 @@ function deleteTask(projectName, task) {
     deleteTaskInArray(projectName, task);
 }
 
-function renderExpandedTask(taskContainer, task) {
-    taskContainer.replaceChildren();
-    taskContainer.classList.remove('to-do-minimised');
-    taskContainer.classList.add('to-do-expanded');
-
-    const taskDiv = document.createElement('div');
-    taskDiv.classList.add('task-edit')
-    const inputCheck = document.createElement('input');
-    inputCheck.type = 'checkbox';
-    inputCheck.name = 'todo';
-    inputCheck.id = 'todo';
-    const inputTitle = document.createElement('input');
-    inputTitle.type = 'text';
-    inputTitle.name = 'text-edit'
-    inputTitle.id = 'text-edit'
-    inputTitle.value = task.title;
-    inputTitle.maxLength = '20'
-    taskDiv.append(inputCheck, inputTitle);
-
-    const descriptionDiv = document.createElement('div');
-    descriptionDiv.classList.add('description-edit');
-    const labelDesc = document.createElement('label');
-    labelDesc.for = 'description';
-    labelDesc.textContent = "Description:";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.name = "description-edit";
-    inputDesc.id = "description-edit";
-    inputDesc.value = task.description;
-    descriptionDiv.append(labelDesc, inputDesc)
-
-    const priorityDateDiv = document.createElement('div');
-    priorityDateDiv.classList.add('priority-date-edit');
-    const select = document.createElement('select');
-    select.name = 'priority-edit';
-    select.id = 'priority-edit';
-    select.maxLength = '100';
-    select.classList.add(task.priority);
-
-    const options = [
-        { text: "Low", value: "low" },
-        { text: "Medium", value: "medium" },
-        { text: "High", value: "high" },
-    ]
-    options.forEach(option => {
-        select.add(new Option(option.text, option.value))
-    })
-
-    const dateInput = document.createElement('input');
-    dateInput.type = 'date';
-    dateInput.name = 'edit-date';
-    dateInput.id = 'edit-input';
-    dateInput.value = task.duedate;
-    priorityDateDiv.append(select, dateInput)
-
-    const editButtonDiv = document.createElement('div');
-    editButtonDiv.classList.add('edit-buttons');
-    const editSpan = document.createElement('span');
-    editSpan.classList.add('edit');
-    const editBtn = document.createElement('img');
-    editBtn.src = editImg;
-    editBtn.alt = "edit";
-    editSpan.appendChild(editBtn);
-    const expandSpan = document.createElement('span');
-    expandSpan.classList.add('expand');
-    const expandBtn = document.createElement('img');
-    expandBtn.src = expandImg;
-    expandBtn.alt = "expand";
-    expandSpan.appendChild(expandBtn);
-    const delSpan = document.createElement('span');
-    delSpan.classList.add('delete');
-    const delBtn = document.createElement('img');
-    delBtn.src = delImg;
-    delBtn.alt = "delete";
-    delSpan.appendChild(delBtn);
-    editButtonDiv.append(editSpan, expandSpan, delSpan)
-
-    expandBtn.addEventListener('click', () => {
-        const visibility = window.getComputedStyle(descriptionDiv)
-        if(visibility.display === "none") {
-            descriptionDiv.style.display = "";
-        }
-        else {
-            descriptionDiv.style.display = "none"
-        }
-    })
-
-    taskContainer.append(taskDiv, descriptionDiv, priorityDateDiv, editButtonDiv);
-
-}

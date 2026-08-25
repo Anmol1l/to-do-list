@@ -1,4 +1,4 @@
-import { renderNewTasks } from "./render.js";
+import { renderExpandedTask } from "./render.js";
 
 class ToDo {
     constructor(title, description, duedate, priority, id) {
@@ -19,7 +19,7 @@ export function createToDoArray(projectName, title, description, duedate, priori
     const todo = new ToDo(title, description, duedate, priority);
     ToDoLists[projectName].push(todo);
     console.log(ToDoLists[projectName]);
-    renderNewTasks(ToDoLists[projectName].at(-1));
+    renderExpandedTask(ToDoLists[projectName].at(-1));
 }
 
 window.ToDoLists = ToDoLists;
