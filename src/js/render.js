@@ -281,6 +281,16 @@ function renderExpandedTask(taskContainer, task) {
     delSpan.appendChild(delBtn);
     editButtonDiv.append(editSpan, expandSpan, delSpan)
 
+    expandBtn.addEventListener('click', () => {
+        const visibility = window.getComputedStyle(descriptionDiv)
+        if(visibility.display === "none") {
+            descriptionDiv.style.display = "";
+        }
+        else {
+            descriptionDiv.style.display = "none"
+        }
+    })
+
     taskContainer.append(taskDiv, descriptionDiv, priorityDateDiv, editButtonDiv);
 
 }
