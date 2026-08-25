@@ -234,6 +234,7 @@ main {
     font-size: 1.2rem;
     padding: 20px 5px 0px 5px;
     position: relative;
+    height: 60px;
 }
 
 .task {
@@ -322,10 +323,125 @@ main {
     width: 30px;
 }
 
-.to-do-minimised:hover {
+.to-do-minimised:hover,
+.to-do-expanded:hover {
     background-color: #efecec77;
 }
 
-.to-do-minimised:hover .edit-buttons {
+.to-do-minimised:hover .edit-buttons,
+.to-do-expanded:hover .edit-buttons {
     visibility: visible;
+}
+
+.to-do-expanded {
+    /* height: 100px; */
+    font-size: 1.2rem;
+    padding: 20px 5px 0px 5px;
+    position: relative;
+}
+
+.to-do-expanded hr {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgba(0, 0, 0, 0.154);
+}
+
+.task-edit input[type="text"] {
+    border: none;
+    font-size: 1.2rem;
+    background-color: inherit;
+}
+
+.task-edit input[type="text"]:disabled,
+.description-edit input[type="text"]:disabled {
+    background-color: inherit;
+    color: black;
+}
+
+.task-edit input[type="text"]:focus,
+.description-edit input[type="text"]:focus {
+    outline: none;
+    background-color: #ebebeb51;
+}
+
+.description-edit {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    margin-left: 24px;
+}
+
+.description-edit input[type="text"] {
+    border: none;
+    width: 600px;
+    font-size: 0.9rem;
+    background-color: inherit;
+}
+
+.priority-date-edit {
+    margin-top: 30px;
+    height: 16px;
+    display: flex;
+    gap: 10px;
+    margin-left: 24px;
+}
+
+.priority-date-edit select.low {
+    appearance: none;
+    background-color: #18b3f0;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: block;
+    width: 51px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.priority-date-edit select.low:disabled {
+    opacity: 1;
+}
+
+.priority-date-edit select.medium {
+    appearance: none;
+    background-color: #f6a50e;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: block;
+    width: 51px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.priority-date-edit select.medium:disabled {
+    opacity: 1;
+}
+
+.priority-date-edit select.high {
+    appearance: none;
+    background-color: #e94a4a;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: block;
+    width: 51px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.priority-date-edit select.high:disabled {
+    opacity: 1;
+}
+
+.priority-date-edit input[type = "date"]{
+    border: none;
+    background-color: inherit;
+}
+
+.priority-date-edit input[type = "date"]:focus{
+    outline: none;
 }
