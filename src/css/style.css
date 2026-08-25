@@ -130,7 +130,6 @@ li:hover span#img img {
 
 main {
     background-color: #c2cdd6;
-    /* margin-left: 400px; */
 }
 
 /* dialog */
@@ -305,6 +304,11 @@ main {
     right: 19px;
     cursor: pointer;
     visibility: hidden;
+    margin-left: 20px;
+}
+
+.edit-buttons img {
+    margin-left: 5px;
 }
 
 .edit {

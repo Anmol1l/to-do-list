@@ -1,8 +1,9 @@
-import { createProject, deleteProject } from "./toDo.js";
+import { createProject, deleteProject, deleteTaskInArray } from "./toDo.js";
 import { compareAsc } from "date-fns";
 import closeImg from "../images-and-icons/close.svg";
 import expandImg from "../images-and-icons/expand.svg";
 import editImg from "../images-and-icons/edit.svg";
+import delImg from "../images-and-icons/delete.svg"
 
 // render project section
 
@@ -101,10 +102,15 @@ export function clearProjectName() {
 }
 
 export function renderNewTasks(task) {
+
     const canvas = document.querySelector('#to-dos');
 
     const toDoMinimised = document.createElement('div');
     toDoMinimised.classList.add('to-do-minimised');
+    toDoMinimised.dataset.id = task.id;
+
+    const projectContainer = document.querySelector('.select');
+    const projectName = projectContainer.querySelector('#project-name').textContent;
 
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task')
@@ -120,12 +126,12 @@ export function renderNewTasks(task) {
     const priorityDateDiv = document.createElement('div');
     priorityDateDiv.classList.add('priority-date');
     const prioritySpan = document.createElement('span');
-    prioritySpan.classList.add('priority',task.priority);
+    prioritySpan.classList.add('priority', task.priority);
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
     dateSpan.textContent = task.duedate;
-    checkDate(dateSpan.textContent,dateSpan);
-    priorityDateDiv.append(prioritySpan,dateSpan);
+    checkDate(dateSpan.textContent, dateSpan);
+    priorityDateDiv.append(prioritySpan, dateSpan);
 
     const editButtonDiv = document.createElement('div');
     editButtonDiv.classList.add('edit-buttons');
@@ -139,13 +145,24 @@ export function renderNewTasks(task) {
     expandSpan.classList.add('expand');
     const expandBtn = document.createElement('img');
     expandBtn.src = expandImg;
-    expandBtn.alt = "expand"
+    expandBtn.alt = "expand";
     expandSpan.appendChild(expandBtn);
-    editButtonDiv.append(editSpan,expandSpan)
+    const delSpan = document.createElement('span');
+    delSpan.classList.add('delete');
+    const delBtn = document.createElement('img');
+    delBtn.src = delImg;
+    delBtn.alt = "delete";
+    delSpan.appendChild(delBtn);
+
+    delSpan.addEventListener('click', () => {
+        deleteTask(projectName, toDoMinimised);
+    })
+
+    editButtonDiv.append(editSpan, expandSpan, delSpan)
 
     const hr = document.createElement('hr');
 
-    toDoMinimised.append(taskDiv, priorityDateDiv,editButtonDiv, hr);
+    toDoMinimised.append(taskDiv, priorityDateDiv, editButtonDiv, hr);
     canvas.appendChild(toDoMinimised)
 }
 
@@ -157,7 +174,7 @@ export function renderAllTasks(taskArray) {
 
 window.renderAllTasks = renderAllTasks;
 
-function checkDate(date,dateSpan) {
+function checkDate(date, dateSpan) {
     const today = new Date().toISOString().split('T')[0];
     let result = compareAsc(new Date(date), new Date(today));
 
@@ -176,4 +193,9 @@ function checkDate(date,dateSpan) {
 export function clearCanvas() {
     const canvas = document.querySelector('#to-dos');
     canvas.replaceChildren();
+}
+
+function deleteTask(projectName,task) {
+    task.remove();
+    deleteTaskInArray(projectName,task);
 }
