@@ -8,6 +8,23 @@ class ToDo {
         this.priority = priority;
         this.id = crypto.randomUUID();
     }
+
+    changeTitle (text) {
+        this.title = text;
+    }
+
+    changeDescription (text) {
+        this.description = text;
+    }
+
+    changeDuedate (text) {
+        this.duedate = text;
+    }
+
+    changePriority (text) {
+        this.priority = text;
+    }
+
 }
 
 export const ToDoLists = {
@@ -19,6 +36,8 @@ export function createToDoArray(projectName, title, description, duedate, priori
     const todo = new ToDo(title, description, duedate, priority);
     ToDoLists[projectName].push(todo);
     console.log(ToDoLists[projectName]);
+    console.log(ToDoLists[projectName][0]);
+    console.log(ToDoLists[projectName][0].changeTitle("hi"));
     renderExpandedTask(ToDoLists[projectName].at(-1));
 }
 
