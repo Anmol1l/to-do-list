@@ -146,11 +146,16 @@ export function renderExpandedTask(task) {
 
     const priorityDateDiv = document.createElement('div');
     priorityDateDiv.classList.add('priority-date-edit');
-    const select = document.createElement('select');
-    select.name = 'priority-edit';
-    select.id = 'priority-edit';
-    select.maxLength = '100';
-    select.classList.add(task.priority);
+    const inputSelect = document.createElement('select');
+    inputSelect.name = 'priority-edit';
+    inputSelect.id = 'priority-edit';
+    inputSelect.maxLength = '100';
+    inputSelect.classList.add(task.priority);
+
+    inputSelect.addEventListener('change', (event) => {
+        inputSelect.className = "";
+        inputSelect.classList.add(event.target.value);
+    })
 
     const options = [
         { text: "Low", value: "low" },
@@ -158,9 +163,9 @@ export function renderExpandedTask(task) {
         { text: "High", value: "high" },
     ]
     options.forEach(option => {
-        select.add(new Option(option.text, option.value))
+        inputSelect.add(new Option(option.text, option.value))
     })
-    select.disabled = true;
+    inputSelect.disabled = true;
 
     const inputDate = document.createElement('input');
     inputDate.type = 'date';
@@ -169,7 +174,7 @@ export function renderExpandedTask(task) {
     inputDate.value = task.duedate;
     inputDate.disabled = true;
     inputDate.style.display = "none";
-    priorityDateDiv.append(select, inputDate);
+    priorityDateDiv.append(inputSelect, inputDate);
 
 
     const editButtonDiv = document.createElement('div');
@@ -218,9 +223,38 @@ export function renderExpandedTask(task) {
     form.appendChild(toDoExpanded);
     canvas.appendChild(form);
 
+    let editing = false;
     editSpan.addEventListener('click', () => {
-        editBtn.src = saveImg;
-        editTask(form, task, inputTitle, inputDesc, select, inputDate, editSpan);
+
+        if (editing == false) {
+            editBtn.src = saveImg;
+
+            for (const element of form.elements) {
+                element.disabled = false;
+            }
+
+            editing = true;
+        }
+
+        else if (editing == true) {
+
+            const title = inputTitle.value;
+            const description = inputDesc.value;
+            const select = inputSelect.value;
+            const duedate = inputDate.value;
+
+            editToDo(task, title, description, select, duedate);
+            editBtn.src = editImg;
+
+            for (const elements of form.elements) {
+                if (elements === inputCheck) {
+                    continue;
+                }
+                elements.disabled = true;
+            }
+            editing = false;
+        }
+
     })
 
 }
@@ -257,37 +291,11 @@ function deleteTask(projectName, task) {
     deleteTaskInArray(projectName, task);
 }
 
-function editTask(form, task, inputTitle, inputDescription, inputSelect, inputDate, editSpan) {
-    const checkbox = form.querySelector('#todo');
+// function editTask(form, task, inputTitle, inputDescription, inputSelect, inputDate, editSpan) {
+// for (const element of form.elements) {
+//     element.disabled = false;
+// }
 
-    for (const elements of form.elements) {
-        elements.disabled = false;
-    }
 
-    inputSelect.addEventListener('change', (event) => {
-        inputSelect.className = "";
-        inputSelect.classList.add(event.target.value);
-    })
-
-    editSpan.addEventListener('click', () => {
-
-        const title = inputTitle.value;
-        const description = inputDescription.value;
-        const select = inputSelect.value;
-        const duedate = inputDate.value;
-
-        editToDo(task, title, description, select, duedate);
-        const editBtn = editSpan.querySelector('img')
-        editBtn.src = editImg;
-
-        for (const elements of form.elements) {
-
-            if(elements === checkbox) {
-                continue;
-            }
-            elements.disabled = true;
-        }
-    })
-
-}
+// }
 
