@@ -9,6 +9,10 @@ class ToDo {
         this.id = crypto.randomUUID();
     }
 
+    hi() {
+        console.log("hi")
+    }
+
     changeTitle (text) {
         this.title = text;
     }
@@ -37,7 +41,6 @@ export function createToDoArray(projectName, title, description, duedate, priori
     ToDoLists[projectName].push(todo);
     console.log(ToDoLists[projectName]);
     console.log(ToDoLists[projectName][0]);
-    console.log(ToDoLists[projectName][0].changeTitle("hi"));
     renderExpandedTask(ToDoLists[projectName].at(-1));
 }
 
@@ -59,4 +62,12 @@ function findArrayIndex(taskId,array) {
 export function deleteTaskInArray(projectName, task) {
     const index = findArrayIndex(task.dataset.id,ToDoLists[projectName]);
     ToDoLists[projectName].splice(index, 1);
+}
+
+export function editToDo(task,title,description,priority,date) {
+
+    task.changeTitle(title);
+    task.changeDescription(description);
+    task.changePriority(priority);
+    task.changeDuedate(date);
 }

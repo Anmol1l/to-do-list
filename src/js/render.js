@@ -1,9 +1,10 @@
-import { createProject, deleteProject, deleteTaskInArray } from "./toDo.js";
+import { createProject, deleteProject, deleteTaskInArray, editToDo } from "./toDo.js";
 import { compareAsc } from "date-fns";
 import closeImg from "../images-and-icons/close.svg";
 import expandImg from "../images-and-icons/expand.svg";
 import editImg from "../images-and-icons/edit.svg";
 import delImg from "../images-and-icons/delete.svg"
+import saveImg from "../images-and-icons/save.svg"
 
 // render project section
 
@@ -104,6 +105,8 @@ export function clearProjectName() {
 export function renderExpandedTask(task) {
 
     const canvas = document.querySelector('#to-dos');
+    const form = document.createElement('form');
+
 
     const toDoExpanded = document.createElement('div');
     toDoExpanded.classList.add('to-do-expanded');
@@ -159,13 +162,14 @@ export function renderExpandedTask(task) {
     })
     select.disabled = true;
 
-    const dateInput = document.createElement('input');
-    dateInput.type = 'date';
-    dateInput.name = 'edit-date';
-    dateInput.id = 'edit-input';
-    dateInput.value = task.duedate;
-    dateInput.disabled = true;
-    priorityDateDiv.append(select, dateInput);
+    const inputDate = document.createElement('input');
+    inputDate.type = 'date';
+    inputDate.name = 'edit-date';
+    inputDate.id = 'edit-input';
+    inputDate.value = task.duedate;
+    inputDate.disabled = true;
+    inputDate.style.display = "none";
+    priorityDateDiv.append(select, inputDate);
 
 
     const editButtonDiv = document.createElement('div');
@@ -190,18 +194,16 @@ export function renderExpandedTask(task) {
     delSpan.appendChild(delBtn);
     editButtonDiv.append(editSpan, expandSpan, delSpan);
 
-    // editSpan.addEventListener('click', () => {
-
-    // })
-
-    expandBtn.addEventListener('click', () => {
+    expandSpan.addEventListener('click', () => {
         const visibility = window.getComputedStyle(descriptionDiv)
         if (visibility.display === "none") {
             descriptionDiv.style.display = "";
+            inputDate.style.display = "";
             editSpan.classList.add('edit-mode');
         }
         else {
             descriptionDiv.style.display = "none"
+            inputDate.style.display = "none";
             editSpan.classList.remove('edit-mode');
         }
     })
@@ -213,7 +215,14 @@ export function renderExpandedTask(task) {
     const hr = document.createElement('hr');
 
     toDoExpanded.append(taskDiv, descriptionDiv, priorityDateDiv, editButtonDiv, hr);
-    canvas.appendChild(toDoExpanded)
+    form.appendChild(toDoExpanded);
+    canvas.appendChild(form);
+
+    editSpan.addEventListener('click', () => {
+        editBtn.src = saveImg;
+        editTask(form, task, inputTitle, inputDesc, select, inputDate, editSpan);
+    })
+
 }
 
 export function renderAllTasks(taskArray) {
@@ -221,8 +230,6 @@ export function renderAllTasks(taskArray) {
         renderExpandedTask(task);
     });
 }
-
-window.renderAllTasks = renderAllTasks;
 
 function checkDate(date, dateSpan) {
     const today = new Date().toISOString().split('T')[0];
@@ -248,5 +255,33 @@ export function clearCanvas() {
 function deleteTask(projectName, task) {
     task.remove();
     deleteTaskInArray(projectName, task);
+}
+
+function editTask(form, task, inputTitle, inputDescription, inputSelect, inputDate, editSpan) {
+    for (const elements of form.elements) {
+        elements.disabled = false;
+    }
+
+    inputSelect.addEventListener('change', (event) => {
+        inputSelect.className = "";
+        inputSelect.classList.add(event.target.value);
+    })
+
+    editSpan.addEventListener('click', () => {
+
+        const title = inputTitle.value;
+        const description = inputDescription.value;
+        const select = inputSelect.value;
+        const duedate = inputDate.value;
+
+        editToDo(task, title, description, select, duedate);
+        const editBtn = editSpan.querySelector('img')
+        editBtn.src = editImg;
+
+        for (const elements of form.elements) {
+            elements.disabled = true;
+        }
+    })
+
 }
 
