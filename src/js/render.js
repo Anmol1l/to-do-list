@@ -258,6 +258,8 @@ function deleteTask(projectName, task) {
 }
 
 function editTask(form, task, inputTitle, inputDescription, inputSelect, inputDate, editSpan) {
+    const checkbox = form.querySelector('#todo');
+
     for (const elements of form.elements) {
         elements.disabled = false;
     }
@@ -279,6 +281,10 @@ function editTask(form, task, inputTitle, inputDescription, inputSelect, inputDa
         editBtn.src = editImg;
 
         for (const elements of form.elements) {
+
+            if(elements === checkbox) {
+                continue;
+            }
             elements.disabled = true;
         }
     })
