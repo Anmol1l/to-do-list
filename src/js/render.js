@@ -130,6 +130,15 @@ export function renderExpandedTask(task) {
     inputTitle.disabled = true;
     taskDiv.append(inputCheck, inputTitle);
 
+    inputCheck.addEventListener('change', (event) => {
+        if(event.target.checked) {
+            toDoExpanded.classList.add('checked');
+        }
+        if(!event.target.checked){
+            toDoExpanded.classList.remove('checked');
+        }
+    })
+
     const descriptionDiv = document.createElement('div');
     descriptionDiv.classList.add('description-edit');
     const labelDesc = document.createElement('label');
@@ -151,10 +160,13 @@ export function renderExpandedTask(task) {
     inputSelect.id = 'priority-edit';
     inputSelect.maxLength = '100';
     inputSelect.classList.add(task.priority);
+    toDoExpanded.classList.add(`${task.priority}-priority`);
 
     inputSelect.addEventListener('change', (event) => {
         inputSelect.className = "";
+        toDoExpanded.classList.remove(`${task.priority}-priority`);
         inputSelect.classList.add(event.target.value);
+        toDoExpanded.classList.add(`${event.target.value}-priority`);
     })
 
     const options = [
@@ -165,6 +177,7 @@ export function renderExpandedTask(task) {
     options.forEach(option => {
         inputSelect.add(new Option(option.text, option.value))
     })
+    inputSelect.value = task.priority;
     inputSelect.disabled = true;
 
     const inputDate = document.createElement('input');
@@ -219,9 +232,9 @@ export function renderExpandedTask(task) {
 
     const hr = document.createElement('hr');
 
-    toDoExpanded.append(taskDiv, descriptionDiv, priorityDateDiv, editButtonDiv, hr);
-    form.appendChild(toDoExpanded);
-    canvas.appendChild(form);
+    form.append(taskDiv, descriptionDiv, priorityDateDiv, editButtonDiv, hr);
+    toDoExpanded.appendChild(form);
+    canvas.appendChild(toDoExpanded);
 
     let editing = false;
     editSpan.addEventListener('click', () => {
@@ -290,12 +303,3 @@ function deleteTask(projectName, task) {
     task.remove();
     deleteTaskInArray(projectName, task);
 }
-
-// function editTask(form, task, inputTitle, inputDescription, inputSelect, inputDate, editSpan) {
-// for (const element of form.elements) {
-//     element.disabled = false;
-// }
-
-
-// }
-

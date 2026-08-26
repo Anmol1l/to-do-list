@@ -228,6 +228,9 @@ main {
 
 #to-dos {
     padding: 0px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .edit-buttons {
@@ -268,7 +271,6 @@ main {
 }
 
 .to-do-expanded {
-    /* height: 100px; */
     font-size: 1.2rem;
     padding: 20px 5px 0px 5px;
     position: relative;
@@ -277,7 +279,7 @@ main {
 .to-do-expanded hr {
     width: 100%;
     margin-top: 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     border-color: rgba(0, 0, 0, 0.154);
 }
 
@@ -385,3 +387,24 @@ main {
     outline: none;
 }
 
+.low-priority {
+    order: 0;
+}
+
+.medium-priority {
+    order: -1;
+}
+
+.high-priority {
+    order: -2;
+}
+
+.to-do-expanded.checked,
+.to-do-expanded.checked:hover {
+    background-color: rgba(160, 158, 158, 0.346);
+        order: 1;
+}
+
+.checked .task-edit {
+    text-decoration: line-through;
+}
