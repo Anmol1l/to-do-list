@@ -138,6 +138,7 @@ export function renderExpandedTask(task) {
     inputDesc.id = "description-edit";
     inputDesc.value = task.description;
     inputDesc.disabled = true;
+    descriptionDiv.style.display = "none";
     descriptionDiv.append(labelDesc, inputDesc)
 
     const priorityDateDiv = document.createElement('div');
@@ -187,15 +188,21 @@ export function renderExpandedTask(task) {
     delBtn.src = delImg;
     delBtn.alt = "delete";
     delSpan.appendChild(delBtn);
-    editButtonDiv.append(editSpan, expandSpan, delSpan)
+    editButtonDiv.append(editSpan, expandSpan, delSpan);
+
+    // editSpan.addEventListener('click', () => {
+
+    // })
 
     expandBtn.addEventListener('click', () => {
         const visibility = window.getComputedStyle(descriptionDiv)
         if (visibility.display === "none") {
             descriptionDiv.style.display = "";
+            editSpan.classList.add('edit-mode');
         }
         else {
             descriptionDiv.style.display = "none"
+            editSpan.classList.remove('edit-mode');
         }
     })
 
