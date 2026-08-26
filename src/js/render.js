@@ -187,6 +187,7 @@ export function renderExpandedTask(task) {
     inputDate.value = task.duedate;
     inputDate.disabled = true;
     inputDate.style.display = "none";
+    checkDate(task.duedate,inputDate);
     priorityDateDiv.append(inputSelect, inputDate);
 
 
@@ -265,6 +266,7 @@ export function renderExpandedTask(task) {
                 }
                 elements.disabled = true;
             }
+            checkDate(duedate,inputDate);
             editing = false;
         }
 

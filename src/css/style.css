@@ -136,6 +136,21 @@ main {
 
 .add-task-dialog {
     margin: auto;
+    background-color: #7f9dde;
+    border: none;
+    color: white;
+}
+
+#add-task {
+    border: 1px solid #7f9dde;
+    background-color: #0b920b;
+    padding: 4px 10px;
+    color: white;
+    border-radius: 4px;
+}
+
+#add-task:hover {
+    border: 1px solid #03a803;
 }
 
 .task-form {
