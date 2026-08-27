@@ -71,6 +71,7 @@ export function selectProject() {
         })
     })
 }
+selectProject();
 
 function checkSelectClass(projects) {
     projects.forEach(project => {
@@ -86,9 +87,10 @@ function createToDoInProject() {
     createToDo(projectName);
 }
 
-function showTasksOfSelectProject() {
+export function showTasksOfSelectProject() {
     const projectContainer = document.querySelector('.select');
     const projectName = projectContainer.querySelector('#project-name').textContent;
     clearCanvas();
-    renderAllTasks(ToDoLists[projectName]);
+    renderAllTasks(ToDoLists[projectName].array);
 }
+showTasksOfSelectProject();

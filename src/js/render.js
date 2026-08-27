@@ -18,7 +18,7 @@ export function checkProjectValidityAndRender() {
 
     if (projectForm.reportValidity() && projectName != 'To-Do' && !duplicate) {
 
-        createProject(projectName);
+        createProject(projectName,projectColor);
         renderProjects(projectName,projectColor);
         projectForm.reset();
 
@@ -310,7 +310,8 @@ function checkDate(date, dateSpan) {
 
 export function clearCanvas() {
     const canvas = document.querySelector('#to-dos');
-    canvas.replaceChildren();
+    if(canvas)
+        canvas.replaceChildren();
 }
 
 function deleteTask(projectName, task) {

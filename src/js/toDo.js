@@ -1,5 +1,4 @@
 import { renderExpandedTask, renderProjects } from "./render.js";
-import { selectProject } from "./dom.js";
 
 
 class ToDo {
@@ -30,24 +29,24 @@ class ToDo {
 }
 
 export const ToDoLists = {
-    "To-Do": [],
+    "To-Do": { array: [], color: '#f55656' },
 };
 
 export function createToDoArray(projectName, title, description, duedate, priority) {
 
     const todo = new ToDo(title, description, duedate, priority);
-    ToDoLists[projectName].push(todo);
-    console.log(ToDoLists[projectName]);
+    ToDoLists[projectName].array.push(todo);
+    // console.log(ToDoLists[projectName].array);
     // console.log(ToDoLists[projectName][0]);
-    renderExpandedTask(ToDoLists[projectName].at(-1));
+    renderExpandedTask(ToDoLists[projectName].array.at(-1));
     updateLocalStorage(ToDoLists);
 
 }
 
 window.ToDoLists = ToDoLists;
 
-export function createProject(projectName) {
-    ToDoLists[projectName] = [];
+export function createProject(projectName, projectColor) {
+    ToDoLists[projectName] = { array: [], color: projectColor };
     updateLocalStorage(ToDoLists);
 }
 
@@ -62,8 +61,8 @@ function findArrayIndex(taskId, array) {
 }
 
 export function deleteTaskInArray(projectName, task) {
-    const index = findArrayIndex(task.dataset.id, ToDoLists[projectName]);
-    ToDoLists[projectName].splice(index, 1);
+    const index = findArrayIndex(task.dataset.id, ToDoLists[projectName].array);
+    ToDoLists[projectName].array.splice(index, 1);
     updateLocalStorage(ToDoLists);
 }
 
@@ -88,21 +87,40 @@ function fetchStorage() {
 
 window.fetchStorage = fetchStorage;
 
-function populateWithLocalStorage() {
+export function populateWithLocalStorage() {
     const data = fetchStorage();
     const projects = Object.keys(data);
-    console.log(projects);
+    console.log(data);
 
     for (const project of projects) {
 
         if (project == 'To-Do') {
+            for (const element of data[project].array) {
+                populateTasks(project, element);
+            }
             continue;
         }
-        createProject(project);
-        renderProjects(project, 'red');
-        selectProject();
+        createProject(project,data[project].color);
+        renderProjects(project, data[project].color);
+        for (const element of data[project].array) {
+            populateTasks(project, element);
+        }
+        console.log(data[project].array[0]);
     }
+}
 
+function populateTasks(project, value) {
 
+    const title = value.title;
+    const description = value.description;
+    const duedate = value.duedate;
+    const priority = value.priority;
+    const todo = new ToDo(title, description, duedate, priority);
+    ToDoLists[project].array.push(todo);
+
+}
+
+if (localStorage.length > 0) {
+    populateWithLocalStorage();
 }
 window.populateWithLocalStorage = populateWithLocalStorage;
