@@ -1,5 +1,5 @@
 import { createToDoArray, ToDoLists } from "./toDo.js";
-import { renderProjects, renderProjectName, clearProjectName, renderAllTasks, clearCanvas } from "./render.js";
+import { checkProjectValidityAndRender, renderProjects, renderProjectName, clearProjectName, renderAllTasks, clearCanvas } from "./render.js";
 
 
 export function openTaskDialog() {
@@ -50,7 +50,7 @@ function addProject() {
     const addProjectBtn = document.querySelector('.add-project-Btn');
     addProjectBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        renderProjects();
+        checkProjectValidityAndRender();
         const dialog = document.querySelector('.add-project-dialog');
         dialog.close();
         selectProject();
@@ -58,7 +58,7 @@ function addProject() {
 }
 addProject();
 
-function selectProject() {
+export function selectProject() {
     const projects = document.querySelectorAll('.projects ul li');
 
     projects.forEach(project => {

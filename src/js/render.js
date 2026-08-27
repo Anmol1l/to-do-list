@@ -8,10 +8,23 @@ import saveImg from "../images-and-icons/save.svg"
 
 // render project section
 
-export function renderProjects() {
+export function checkProjectValidityAndRender() {
+
     const projectForm = document.querySelector('.project-form')
     const projectName = document.querySelector('#project').value;
     const projectColor = document.querySelector('#color').value;
+
+    if (projectForm.reportValidity() && projectName != 'To-Do') {
+
+        createProject(projectName);
+        renderProjects(projectName,projectColor);
+        projectForm.reset();
+
+
+    }
+}
+
+export function renderProjects(projectName,projectColor) {
 
     const projectList = document.querySelector('.projects ul');
     const listItem = document.createElement('li');
@@ -26,17 +39,14 @@ export function renderProjects() {
     img.alt = "close";
     spanImg.appendChild(img);
 
-    if (projectForm.reportValidity() && projectName != 'To-Do') {
-        spanText.textContent = projectName;
-        div.append(spanText, spanImg);
-        listItem.appendChild(div);
+    spanText.textContent = projectName;
+    div.append(spanText, spanImg);
+    listItem.appendChild(div);
 
-        createProject(projectName);
-        setProjectColor(listItem, projectColor)
 
-        projectList.appendChild(listItem);
-        projectForm.reset();
-    }
+    projectList.appendChild(listItem);
+
+    setProjectColor(listItem, projectColor)
 
     spanImg.addEventListener('click', () => {
         deleteProjectRender(listItem, projectList, projectName);
@@ -131,10 +141,10 @@ export function renderExpandedTask(task) {
     taskDiv.append(inputCheck, inputTitle);
 
     inputCheck.addEventListener('change', (event) => {
-        if(event.target.checked) {
+        if (event.target.checked) {
             toDoExpanded.classList.add('checked');
         }
-        if(!event.target.checked){
+        if (!event.target.checked) {
             toDoExpanded.classList.remove('checked');
         }
     })
@@ -187,7 +197,7 @@ export function renderExpandedTask(task) {
     inputDate.value = task.duedate;
     inputDate.disabled = true;
     inputDate.style.display = "none";
-    checkDate(task.duedate,inputDate);
+    checkDate(task.duedate, inputDate);
     priorityDateDiv.append(inputSelect, inputDate);
 
 
@@ -266,7 +276,7 @@ export function renderExpandedTask(task) {
                 }
                 elements.disabled = true;
             }
-            checkDate(duedate,inputDate);
+            checkDate(duedate, inputDate);
             editing = false;
         }
 
