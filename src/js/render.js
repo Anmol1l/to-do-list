@@ -1,4 +1,4 @@
-import { createProject, deleteProject, deleteTaskInArray, editToDo } from "./toDo.js";
+import { ToDoLists, createProject, deleteProject, deleteTaskInArray, editToDo } from "./toDo.js";
 import { compareAsc } from "date-fns";
 import closeImg from "../images-and-icons/close.svg";
 import expandImg from "../images-and-icons/expand.svg";
@@ -14,7 +14,9 @@ export function checkProjectValidityAndRender() {
     const projectName = document.querySelector('#project').value;
     const projectColor = document.querySelector('#color').value;
 
-    if (projectForm.reportValidity() && projectName != 'To-Do') {
+    const duplicate = (projectName in ToDoLists);
+
+    if (projectForm.reportValidity() && projectName != 'To-Do' && !duplicate) {
 
         createProject(projectName);
         renderProjects(projectName,projectColor);

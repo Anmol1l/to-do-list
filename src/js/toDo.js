@@ -48,6 +48,7 @@ window.ToDoLists = ToDoLists;
 
 export function createProject(projectName) {
     ToDoLists[projectName] = [];
+    updateLocalStorage(ToDoLists);
 }
 
 export function deleteProject(name) {
