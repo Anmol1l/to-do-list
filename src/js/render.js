@@ -1,4 +1,4 @@
-import { ToDoLists, createProject, deleteProject, deleteTaskInArray, editToDo } from "./toDo.js";
+import { ToDoLists, createProject, deleteProject, deleteTaskInArray, editToDo, editStatus } from "./toDo.js";
 import { compareAsc } from "date-fns";
 import closeImg from "../images-and-icons/close.svg";
 import expandImg from "../images-and-icons/expand.svg";
@@ -133,6 +133,7 @@ export function renderExpandedTask(task) {
     inputCheck.type = 'checkbox';
     inputCheck.name = 'todo';
     inputCheck.id = 'todo';
+    inputCheck.checked = task.status;
     const inputTitle = document.createElement('input');
     inputTitle.type = 'text';
     inputTitle.name = 'text-edit'
@@ -142,11 +143,18 @@ export function renderExpandedTask(task) {
     inputTitle.disabled = true;
     taskDiv.append(inputCheck, inputTitle);
 
+    if (task.status == true){
+        toDoExpanded.classList.add('checked');
+    }
+
+
     inputCheck.addEventListener('change', (event) => {
         if (event.target.checked) {
+            editStatus(task,true);
             toDoExpanded.classList.add('checked');
         }
         if (!event.target.checked) {
+            editStatus(task,false);
             toDoExpanded.classList.remove('checked');
         }
     })

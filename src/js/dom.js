@@ -29,9 +29,10 @@ export function createToDo(projectName) {
     const description = document.querySelector('#description').value;
     const duedate = document.querySelector('#date').value;
     const priority = document.querySelector('#priority').value;
+    const status = false
 
     if (taskForm.reportValidity()) {
-        createToDoArray(projectName, title, description, duedate, priority)
+        createToDoArray(projectName, title, description, duedate, priority,status)
         taskForm.reset();
         openDialog.close();
     }

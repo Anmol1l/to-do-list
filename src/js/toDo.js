@@ -2,11 +2,12 @@ import { renderExpandedTask, renderProjects } from "./render.js";
 
 
 class ToDo {
-    constructor(title, description, duedate, priority, id) {
+    constructor(title, description, duedate, priority, status, id) {
         this.title = title;
         this.description = description;
         this.duedate = duedate;
         this.priority = priority;
+        this.status = status;
         this.id = crypto.randomUUID();
     }
 
@@ -25,6 +26,9 @@ class ToDo {
     changePriority(text) {
         this.priority = text;
     }
+    changeStatus(status) {
+        this.status = status;
+    }
 
 }
 
@@ -32,9 +36,9 @@ export const ToDoLists = {
     "To-Do": { array: [], color: '#f55656' },
 };
 
-export function createToDoArray(projectName, title, description, duedate, priority) {
+export function createToDoArray(projectName, title, description, duedate, priority, status) {
 
-    const todo = new ToDo(title, description, duedate, priority);
+    const todo = new ToDo(title, description, duedate, priority, status);
     ToDoLists[projectName].array.push(todo);
     // console.log(ToDoLists[projectName].array);
     // console.log(ToDoLists[projectName][0]);
@@ -75,6 +79,11 @@ export function editToDo(task, title, description, priority, date) {
     updateLocalStorage(ToDoLists);
 }
 
+export function editStatus(task, status) {
+    task.changeStatus(status);
+    updateLocalStorage(ToDoLists);
+}
+
 function updateLocalStorage(ToDoLists) {
     localStorage.setItem('data', JSON.stringify(ToDoLists));
 }
@@ -100,7 +109,7 @@ export function populateWithLocalStorage() {
             }
             continue;
         }
-        createProject(project,data[project].color);
+        createProject(project, data[project].color);
         renderProjects(project, data[project].color);
         for (const element of data[project].array) {
             populateTasks(project, element);
@@ -115,7 +124,8 @@ function populateTasks(project, value) {
     const description = value.description;
     const duedate = value.duedate;
     const priority = value.priority;
-    const todo = new ToDo(title, description, duedate, priority);
+    const status = value.status;
+    const todo = new ToDo(title, description, duedate, priority, status);
     ToDoLists[project].array.push(todo);
 
 }
