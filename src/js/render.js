@@ -18,15 +18,15 @@ export function checkProjectValidityAndRender() {
 
     if (projectForm.reportValidity() && projectName != 'To-Do' && !duplicate) {
 
-        createProject(projectName,projectColor);
-        renderProjects(projectName,projectColor);
+        createProject(projectName, projectColor);
+        renderProjects(projectName, projectColor);
         projectForm.reset();
 
 
     }
 }
 
-export function renderProjects(projectName,projectColor) {
+export function renderProjects(projectName, projectColor) {
 
     const projectList = document.querySelector('.projects ul');
     const listItem = document.createElement('li');
@@ -143,18 +143,18 @@ export function renderExpandedTask(task) {
     inputTitle.disabled = true;
     taskDiv.append(inputCheck, inputTitle);
 
-    if (task.status == true){
+    if (task.status == true) {
         toDoExpanded.classList.add('checked');
     }
 
 
     inputCheck.addEventListener('change', (event) => {
         if (event.target.checked) {
-            editStatus(task,true);
+            editStatus(task, true);
             toDoExpanded.classList.add('checked');
         }
         if (!event.target.checked) {
-            editStatus(task,false);
+            editStatus(task, false);
             toDoExpanded.classList.remove('checked');
         }
     })
@@ -288,6 +288,24 @@ export function renderExpandedTask(task) {
             }
             checkDate(duedate, inputDate);
             editing = false;
+
+            window.addEventListener('beforeunload', () => {
+
+                editToDo(task, title, description, select, duedate);
+                editBtn.src = editImg;
+
+                for (const elements of form.elements) {
+                    if (elements === inputCheck) {
+                        continue;
+                    }
+                    elements.disabled = true;
+                }
+                checkDate(duedate, inputDate);
+                editing = false;
+
+            })
+
+
         }
 
     })
@@ -318,7 +336,7 @@ function checkDate(date, dateSpan) {
 
 export function clearCanvas() {
     const canvas = document.querySelector('#to-dos');
-    if(canvas)
+    if (canvas)
         canvas.replaceChildren();
 }
 
